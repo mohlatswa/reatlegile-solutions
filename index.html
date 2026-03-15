@@ -741,6 +741,75 @@ section{position:relative;z-index:1}
 }
 
 /*──────────────────────────────────────────────────────────────
+  TECH NEWS
+──────────────────────────────────────────────────────────────*/
+.news-filters{display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.news-filter-btn{
+  padding:0.5rem 1.1rem;border-radius:100px;
+  font-size:0.78rem;font-weight:600;
+  background:rgba(255,255,255,0.04);color:var(--text-muted);
+  border:1px solid var(--border);cursor:pointer;
+  transition:all 0.3s ease;
+}
+.news-filter-btn:hover{border-color:var(--border-light);color:var(--white)}
+.news-filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.news-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;
+}
+.news-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  transition:all 0.4s var(--ease);
+  display:flex;flex-direction:column;
+}
+.news-card:hover{
+  transform:translateY(-4px);border-color:rgba(14,165,233,0.2);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+.news-card-img{height:180px;overflow:hidden;position:relative;background:var(--surface)}
+.news-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s var(--ease)}
+.news-card:hover .news-card-img img{transform:scale(1.05)}
+.news-card-img .news-source-badge{
+  position:absolute;top:0.75rem;left:0.75rem;
+  padding:0.3rem 0.7rem;border-radius:6px;
+  font-size:0.68rem;font-weight:700;
+  background:rgba(3,7,18,0.8);color:var(--accent);
+  backdrop-filter:blur(8px);border:1px solid rgba(14,165,233,0.2);
+}
+.news-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.news-card-date{font-size:0.75rem;color:var(--text-dim);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.news-card-date svg{width:14px;height:14px}
+.news-card h3{
+  font-family:var(--heading);font-size:1.05rem;
+  color:var(--white);font-weight:600;line-height:1.4;
+  margin-bottom:0.6rem;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.news-card p{
+  font-size:0.84rem;color:var(--text-muted);line-height:1.7;flex:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  margin-bottom:1rem;
+}
+.news-card-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.82rem;font-weight:600;color:var(--accent);
+  transition:gap 0.3s ease;
+}
+.news-card:hover .news-card-link{gap:0.7rem}
+.news-card-link svg{width:16px;height:16px}
+.news-loading{
+  text-align:center;padding:3rem;
+  color:var(--text-muted);font-size:0.9rem;
+}
+.news-loading-spinner{
+  width:36px;height:36px;border:3px solid var(--border);
+  border-top-color:var(--accent);border-radius:50%;
+  margin:0 auto 1rem;animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:480px){.news-grid{grid-template-columns:1fr}}
+
+/*──────────────────────────────────────────────────────────────
   TESTIMONIALS
 ──────────────────────────────────────────────────────────────*/
 .testimonials-grid{
@@ -888,6 +957,7 @@ section{position:relative;z-index:1}
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#news">News</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#freelancing">Freelancing</a></li>
       <li><a href="#contact" class="nav-cta">Contact Us</a></li>
@@ -901,6 +971,7 @@ section{position:relative;z-index:1}
   <a href="#home">Home</a>
   <a href="#about">About</a>
   <a href="#services">Services</a>
+  <a href="#news">News</a>
   <a href="#testimonials">Testimonials</a>
   <a href="#freelancing">Freelancing</a>
   <a href="#contact">Contact Us</a>
@@ -1240,6 +1311,32 @@ section{position:relative;z-index:1}
         <div class="process-num" style="background:linear-gradient(135deg,var(--emerald),#34d399)">3</div>
         <h3>We Deliver Results</h3>
         <p>We execute with professionalism and efficiency — whether on-site or remotely. Our team remains available for post-delivery support and ongoing maintenance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ TECH NEWS ═══ -->
+<section class="section-padding" id="news">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge badge-blue">Industry Updates</div>
+      <h2 class="section-title">Technology <em>News</em></h2>
+      <p class="section-subtitle">Stay informed with the latest developments in cybersecurity, networking, cloud computing, and emerging technologies relevant to our services.</p>
+    </div>
+    <div class="news-filters reveal">
+      <button class="news-filter-btn active" data-category="all">All News</button>
+      <button class="news-filter-btn" data-category="cybersecurity">Cybersecurity</button>
+      <button class="news-filter-btn" data-category="cloud">Cloud & AI</button>
+      <button class="news-filter-btn" data-category="networking">Networking</button>
+      <button class="news-filter-btn" data-category="software">Software</button>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <div class="news-loading" id="newsLoading">
+        <div class="news-loading-spinner"></div>
+        Loading latest technology news...
       </div>
     </div>
   </div>
@@ -1788,6 +1885,216 @@ document.addEventListener('mousemove', (e) => {
     card.style.transform = `${cardBaseTransforms[i] || ''} translate(${x * factor}px, ${y * factor}px)`;
   });
 });
+
+/* ─── Tech News Feed ─── */
+const NEWS_CACHE_KEY = 'reatlegile_news_cache';
+const NEWS_CACHE_DURATION = 3600000; // 1 hour
+
+const newsFeeds = [
+  { url: 'https://feeds.feedburner.com/TheHackersNews', category: 'cybersecurity', source: 'The Hacker News' },
+  { url: 'https://www.bleepingcomputer.com/feed/', category: 'cybersecurity', source: 'BleepingComputer' },
+  { url: 'https://techcrunch.com/feed/', category: 'cloud', source: 'TechCrunch' },
+  { url: 'https://www.zdnet.com/rss.xml', category: 'networking', source: 'ZDNet' },
+  { url: 'https://www.theverge.com/rss/index.xml', category: 'software', source: 'The Verge' },
+];
+
+const defaultNews = [
+  {
+    title: 'AI-Powered Cybersecurity: How Machine Learning Is Transforming Threat Detection',
+    description: 'Artificial intelligence and machine learning are reshaping the cybersecurity landscape, enabling organisations to detect and respond to threats in real time with unprecedented accuracy.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'cybersecurity'
+  },
+  {
+    title: 'The Rise of Zero Trust Architecture in Enterprise Networks',
+    description: 'Zero Trust security models are becoming the standard for modern enterprise networks, requiring verification for every user and device attempting to access resources.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'networking'
+  },
+  {
+    title: 'Cloud Migration Strategies: Best Practices for South African Businesses',
+    description: 'As more organisations transition to cloud infrastructure, understanding the right migration strategy is critical for minimising downtime and ensuring data security.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'cloud'
+  },
+  {
+    title: 'Microsoft 365 Copilot: What IT Administrators Need to Know',
+    description: 'Microsoft continues to integrate AI across its productivity suite, introducing new capabilities that IT administrators must understand to manage deployments effectively.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'software'
+  },
+  {
+    title: 'CCTV and IoT Security: Protecting Connected Surveillance Systems',
+    description: 'As IP-based camera systems become standard, securing these IoT devices against cyber threats is a growing priority for businesses and security professionals.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'cybersecurity'
+  },
+  {
+    title: 'Wi-Fi 7: Next-Generation Wireless Networking for Business',
+    description: 'Wi-Fi 7 promises significantly faster speeds, lower latency, and improved capacity, making it a game-changer for business networking and enterprise connectivity.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'networking'
+  },
+  {
+    title: 'Ransomware Prevention: Essential Strategies for SMEs in 2026',
+    description: 'Small and medium enterprises remain prime targets for ransomware attacks. Implementing layered defences and regular backups is critical for business continuity.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'cybersecurity'
+  },
+  {
+    title: 'Low-Code Development Platforms: Accelerating Digital Transformation',
+    description: 'Low-code and no-code development platforms are enabling businesses to build custom applications rapidly, reducing dependence on traditional software development cycles.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'software'
+  },
+  {
+    title: 'Edge Computing: Bringing Processing Power Closer to the Source',
+    description: 'Edge computing is transforming how businesses process data by reducing latency and bandwidth requirements, particularly for IoT and real-time applications.',
+    link: '#',
+    pubDate: new Date().toISOString(),
+    thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80',
+    source: 'Industry Insight',
+    category: 'cloud'
+  }
+];
+
+async function fetchRSSFeed(feedUrl, category, source) {
+  try {
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&count=4`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error('Feed unavailable');
+    const data = await response.json();
+    if (data.status !== 'ok') throw new Error('Feed error');
+    return data.items.map(item => ({
+      title: item.title,
+      description: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...' : '',
+      link: item.link,
+      pubDate: item.pubDate,
+      thumbnail: item.enclosure?.link || item.thumbnail || '',
+      source: source,
+      category: category
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
+function getPlaceholderImage(category) {
+  const images = {
+    cybersecurity: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80',
+    cloud: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
+    networking: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80',
+    software: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80',
+  };
+  return images[category] || images.software;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function renderNews(articles, filter = 'all') {
+  const grid = document.getElementById('newsGrid');
+  const filtered = filter === 'all' ? articles : articles.filter(a => a.category === filter);
+  const display = filtered.slice(0, 9);
+
+  if (display.length === 0) {
+    grid.innerHTML = '<div class="news-loading">No articles found for this category.</div>';
+    return;
+  }
+
+  grid.innerHTML = display.map(article => `
+    <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="news-card" style="text-decoration:none">
+      <div class="news-card-img">
+        <img src="${article.thumbnail || getPlaceholderImage(article.category)}" alt="" loading="lazy" onerror="this.src='${getPlaceholderImage(article.category)}'">
+        <span class="news-source-badge">${article.source}</span>
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+          ${formatDate(article.pubDate)}
+        </div>
+        <h3>${article.title}</h3>
+        <p>${article.description}</p>
+        <span class="news-card-link">
+          Read More
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"/></svg>
+        </span>
+      </div>
+    </a>
+  `).join('');
+}
+
+async function loadNews() {
+  // Check cache first
+  const cached = localStorage.getItem(NEWS_CACHE_KEY);
+  if (cached) {
+    const { articles, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < NEWS_CACHE_DURATION) {
+      renderNews(articles);
+      setupNewsFilters(articles);
+      return;
+    }
+  }
+
+  // Fetch all feeds in parallel
+  const results = await Promise.all(
+    newsFeeds.map(f => fetchRSSFeed(f.url, f.category, f.source))
+  );
+  let articles = results.flat();
+
+  // Sort by date (newest first)
+  articles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+  // If no live articles fetched, use defaults
+  if (articles.length === 0) {
+    articles = defaultNews;
+  }
+
+  // Cache results
+  localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ articles, timestamp: Date.now() }));
+
+  renderNews(articles);
+  setupNewsFilters(articles);
+}
+
+function setupNewsFilters(articles) {
+  document.querySelectorAll('.news-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderNews(articles, btn.dataset.category);
+    });
+  });
+}
+
+// Load news on page load
+loadNews();
 </script>
 </body>
 </html>
