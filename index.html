@@ -967,19 +967,19 @@ section{position:relative;z-index:1}
     </div>
     <div class="stats-bar">
       <div class="stat-item">
-        <div class="stat-num" data-count="6">0</div>
+        <div class="stat-num" data-count="6" data-suffix="+">0</div>
         <div class="stat-label">Years Experience</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-count="7">0</div>
+        <div class="stat-num" data-count="7" data-suffix="+">0</div>
         <div class="stat-label">Service Areas</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-count="150">0</div>
+        <div class="stat-num" data-count="150" data-suffix="+">0</div>
         <div class="stat-label">Projects Delivered</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-count="98">0</div>
+        <div class="stat-num" data-count="98" data-suffix="+">0</div>
         <div class="stat-label">% Client Satisfaction</div>
       </div>
     </div>
@@ -1682,7 +1682,7 @@ const counterObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const el = entry.target;
       const target = parseInt(el.dataset.count);
-      const suffix = el.dataset.count.includes('+') ? '+' : '';
+      const suffix = el.dataset.suffix || '';
       let current = 0;
       const step = Math.max(1, Math.floor(target / 50));
       const timer = setInterval(() => {
